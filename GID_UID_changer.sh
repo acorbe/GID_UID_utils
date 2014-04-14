@@ -33,13 +33,14 @@ fi
 echo -e 'checking upon new UID ('$NEWUID')...'
 is_int $NEWUID "$NEWUID_ARG_NAME"
 
-RESULT=`awk -F':' -v U="$NEWUID" '$3==U {print "yes" ; exit}' /etc/passwd`
- 
-[ -z $RESULT ] && echo "Already Exists..Exiting..." && exit 1
+RESULT=`awk -F':' -v U="$NEWUID" '$3==U {print "yes" ; exit}' $PASSWD`
 
-# awk -F':' '{if($3 == 1001) print  $1; exit 1}' $PASSWD
-# awk -F':' '{echo suca $1 }' $PASSWD
-#awk -F':' '{print $1}' $PASSWD
+if [[ -z $RESULT ]]
+then
+    echo "Destination UID is available"
+else 
+    echo "Destination UID exists already. Exiting..." && exit 1
+fi
 
 echo 'assigning new UID('$NEWUID') to user '$LOGIN'...'
 # usermod --uid $NEWUID $LOGIN
