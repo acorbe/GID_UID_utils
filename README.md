@@ -7,6 +7,7 @@ These operations are particularly useful e.g. when setting up a NFS share, which
 
 
 USAGE:
+---------------
 
 + **aim:** given a user (say `acorbe`) and a group (say `gacorbe`), one wants to change his UID and the GID referring to his group. If the desired UID is `1001` and the desired GID is `1001`, the operation can be done via
         
